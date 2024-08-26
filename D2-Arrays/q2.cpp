@@ -27,8 +27,21 @@ using namespace std;
 //     return res;
 // }
 
-//Optimal -- TC = O(n*n); SC = O(n*n)
+//Optimal -- TC = O(n*logn) + O(n); SC = O(n)
+vector<vector<int>> merge(vector<vector<int>>& v) {
+    sort(v.begin(), v.end());
+    vector<vector<int>> res;
 
+    for(int i=0; i<v.size(); i++){
+        if(res.empty() || v[i][0] > res.back()[1]){
+            res.push_back(v[i]);
+        }
+        else{
+            res.back()[1] = max(res.back()[1], v[i][1]);
+        }
+    }
+    return res;
+}
 
 int main() {
     vector<vector<int>> intervals = {{2,3},{2,2},{3,3},{1,3},{5,7},{2,2},{4,6}};    
