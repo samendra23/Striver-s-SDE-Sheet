@@ -55,7 +55,7 @@ using namespace std;
 // 	sort(b, b+m);
 // }
 
-//Optimal 2 -- TC = O(min(n,m)) + O(nlogn) + O(mlogm); SC = O(1)
+//Optimal 2 -- TC = O(log(n+m)) * O(n+m); SC = O(1)
 void swapIfGreater(long long a[], long long b[], int ind1, int ind2){
     if(a[ind1] > b[ind2]){
         swap(a[ind1], b[ind2]);
