@@ -41,21 +41,54 @@ using namespace std;
 // }
 
 //Optimal 1 -- TC = O(min(n,m)) + O(nlogn) + O(mlogm); SC = O(1)
-void merge(long long a[], long long b[], int n, int m){	
-    int i = n-1, j = 0;
-	while(i>=0 && j<m){
-		if(a[i] > b[j]){
-			swap(a[i--], b[j++]);
-		}
-		else{
-			break;
-		}
-	}
-	sort(a, a+n);
-	sort(b, b+m);
-}
+// void merge(long long a[], long long b[], int n, int m){	
+//     int i = n-1, j = 0;
+// 	while(i>=0 && j<m){
+// 		if(a[i] > b[j]){
+// 			swap(a[i--], b[j++]);
+// 		}
+// 		else{
+// 			break;
+// 		}
+// 	}
+// 	sort(a, a+n);
+// 	sort(b, b+m);
+// }
 
 //Optimal 2 -- TC = O(min(n,m)) + O(nlogn) + O(mlogm); SC = O(1)
+void swapIfGreater(long long a[], long long b[], int ind1, int ind2){
+    if(a[ind1] > b[ind2]){
+        swap(a[ind1], b[ind2]);
+    }
+}
+
+void merge(long long a[], long long b[], int n, int m){
+    int len = n + m;
+    int gap = len/2 + len%2;
+    while(gap > 0){
+        int left = 0;
+        int right = left + gap;
+        while(right < len){
+            //when l in arr1 and r in arr2
+            if(left < n && right >= n){
+                swapIfGreater(a, b, left, right-n);
+            }
+            //when l in arr2 and r in arr2
+            else if(left >= n){//if l in arr2, r will definitely be in arr2
+                swapIfGreater(b, b, left-n, right-n);
+            }
+            //when l in arr1 and r in arr1
+            else{
+                swapIfGreater(a, a, left, right);
+            }
+            left++, right++;
+        }
+        if(gap == 1){
+            break;
+        }
+        gap = gap/2 + gap%2;
+    }
+}
 
 int main()
 {
