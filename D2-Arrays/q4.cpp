@@ -15,26 +15,62 @@ using namespace std;
 //     return ans;
 // }
 
-//Optimal -- TC = O(n*logn) + O(n); SC = O(n)
-int findDuplicate(vector<int>& nums) {
-    int n = nums.size();
-    int freq[n] = {0};
-    int ans;
+//Optimal -- TC = O(n); SC = O(n)
+// int findDuplicate(vector<int>& nums) {
+//     int n = nums.size();
+//     int freq[n] = {0};
+//     int ans;
 
-    for(int i=0; i<n; i++){
-        if(freq[nums[i]] == 0){
-            freq[nums[i]]++;
-        }
-        else{
-            ans = nums[i];
-            break;
-        }
+//     for(int i=0; i<n; i++){
+//         if(freq[nums[i]] == 0){
+//             freq[nums[i]]++;
+//         }
+//         else{
+//             ans = nums[i];
+//             break;
+//         }
+//     }
+//     return ans;
+// }
+
+//Optimal -- TC = O(n); SC = O(n)
+// int findDuplicate(vector<int>& nums) {
+//     int n = nums.size();
+//     int freq[n] = {0};
+//     int ans;
+
+//     for(int i=0; i<n; i++){
+//         if(freq[nums[i]] == 0){
+//             freq[nums[i]]++;
+//         }
+//         else{
+//             ans = nums[i];
+//             break;
+//         }
+//     }
+//     return ans;
+// }
+
+//Optimal 2 -- TC = O(n); SC = O(1)
+int findDuplicate(vector<int>& nums) {
+    int slow = nums[0];
+    int fast = nums[0];
+
+    do{
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while(slow != fast);
+
+    fast = nums[0];
+    while(slow != fast){
+        slow = nums[slow];
+        fast = nums[fast];
     }
-    return ans;
+    return slow;
 }
 
 int main(){
     vector<int> arr;
-    arr = {1, 3, 4, 2, 2};
+    arr = {2,5,9,6,9,3,8,9,7,1};
     cout << "The duplicate element is " << findDuplicate(arr) << endl;
 }
