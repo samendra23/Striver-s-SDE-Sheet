@@ -25,25 +25,51 @@ using namespace std;
 // }
 
 //Better -- TC = O(2*n); SC = O(n)
-vector<int> findMissingRepeatingNumbers(vector<int> a) {
-    int n = a.size(); // size of the array
-    int hash[n + 1] = {0}; // hash array
+// vector<int> findMissingRepeatingNumbers(vector<int> a) {
+//     int n = a.size(); // size of the array
+//     int hash[n + 1] = {0}; // hash array
 
-    //update the hash array:
-    for (int i = 0; i < n; i++) {
-        hash[a[i]]++;
+//     //update the hash array:
+//     for (int i = 0; i < n; i++) {
+//         hash[a[i]]++;
+//     }
+
+//     //Find the repeating and missing number:
+//     int repeating = -1, missing = -1;
+//     for (int i = 1; i <= n; i++) {
+//         if (hash[i] == 2) repeating = i;
+//         else if (hash[i] == 0) missing = i;
+
+//         if (repeating != -1 && missing != -1)
+//             break;
+//     }
+//     return {repeating, missing};
+// }
+
+//Optimal 1 -- TC = O(n); SC = O(1)
+vector<int> findMissingRepeatingNumbers(vector < int > a) {
+    long long n = a.size();
+    //S - Sn
+    //S2 - Sn2
+    //x -> repeating
+    //y -> missing
+    long long Sn = n*(n+1)/2;
+    long long Sn2 = n*(n+1)*(2*n+1)/6;
+
+    long long S = 0, S2 = 0;
+    for(int i=0; i<n; i++){
+        S += a[i];
+        S2 += (long long)a[i] * (long long)a[i];
     }
 
-    //Find the repeating and missing number:
-    int repeating = -1, missing = -1;
-    for (int i = 1; i <= n; i++) {
-        if (hash[i] == 2) repeating = i;
-        else if (hash[i] == 0) missing = i;
+    long long e1 = S - Sn; //x-y
+    long long e2 = S2 - Sn2;
+    long long e3 = e2/e1; //x+y
 
-        if (repeating != -1 && missing != -1)
-            break;
-    }
-    return {repeating, missing};
+    long long repeating = (e1 + e3)/2;
+    long long missing = repeating - e1;
+
+    return {(int)repeating, (int)missing};
 }
 
 int main(){
