@@ -88,7 +88,48 @@ using namespace std;
 // }
 
 //Optimal -- TC = O(log(n*m)); SC = O(1)
+//1. Mine
+bool binary_search_row(vector<int>& nums, int target) {
+    int n = nums.size(); //size of the array
+    int low = 0, high = n - 1;
 
+    // Perform the steps:
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (nums[mid] == target) return true;
+        else if (target > nums[mid]) low = mid + 1;
+        else high = mid - 1;
+    }
+    return false;
+}
+
+int binary_search_col(vector<vector<int>>& mat, int target) {
+    int row = mat.size();
+    int col = mat[0].size();
+    int low = 0, high = row - 1;
+
+    // Perform the steps:
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (mat[mid][0] <= target && mat[mid][col-1] >= target) return mid;
+        else if (target > mat[mid][0]) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+
+bool searchMatrix(vector<vector<int>>& mat, int target) {
+    if (mat.empty() || mat[0].empty()) {
+        return false;
+    }
+
+        int target_row = binary_search_col(mat, target);
+        if (target_row == -1) {
+        return false;
+    }
+    
+        return binary_search_row(mat[target_row], target);
+}
 
 int main()
 {
