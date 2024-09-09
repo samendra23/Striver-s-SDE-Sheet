@@ -3,28 +3,46 @@
 using namespace std;
 
 //Brute -- TC = O(n); SC = O(1)
+// double myPow(double x, int n)
+// {
+//     double res = 1;
+//     for (int i = 0; i < abs(n); i++)
+//     {
+//         res = res * x;
+//     }
+//     if (n < 0)
+//     {
+//         return 1 / res;
+//     }
+//     else
+//     {
+//         return res;
+//     }
+// }
+
+//Optimal -- TC = O(log(n)); SC = O(1)
 double myPow(double x, int n)
 {
     double res = 1;
-    for (int i = 0; i < abs(n); i++)
+    long long nn = abs(n);
+    while (nn)
     {
-        res = res * x;
+        if (nn % 2 == 0)
+        {
+            x = x * x;
+            nn = nn / 2;
+        }
+        else
+        {
+            res = res * x;
+            nn = nn - 1;
+        }
     }
+
     if (n < 0)
-    {
-        return 1 / res;
-    }
-    else
-    {
-        return res;
-    }
+        res = 1 / res;
+    return res;
 }
-
-//Better -- TC = O(n*log(m)); SC = O(1)
-
-
-//Optimal -- TC = O(log(n*m)); SC = O(1)
-
 
 int main(){
     cout<<myPow(2,10)<<endl;
