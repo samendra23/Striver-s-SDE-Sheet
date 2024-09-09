@@ -50,31 +50,64 @@ using namespace std;
 
 //2. Mine
 //TC = O(n); SC = O(n)
+// int majorityElement(vector<int> &v)
+// {
+//     unordered_map<int, int> mpp;
+//     int num = v[0];
+//     for (int i = 0; i < v.size(); i++)
+//     {
+//         if (mpp.find(v[i]) != mpp.end())
+//         {
+//             mpp[v[i]]++;
+//             if (mpp[v[i]] > (v.size() / 2))
+//             {
+//                 num = v[i];
+//                 break;
+//             }
+//         }
+//         else
+//         {
+//             mpp[v[i]] = 1;
+//         }
+//     }
+//     return num;
+// }
+
+//Optimal -- TC = O(n) + O(n); SC = O(1)
 int majorityElement(vector<int> &v)
 {
-    unordered_map<int, int> mpp;
-    int num = v[0];
+    int elem;
+    int cnt = 0;
     for (int i = 0; i < v.size(); i++)
     {
-        if (mpp.find(v[i]) != mpp.end())
+        if (cnt == 0)
         {
-            mpp[v[i]]++;
-            if (mpp[v[i]] > (v.size() / 2))
-            {
-                num = v[i];
-                break;
-            }
+            elem = v[i];
+            cnt = 1;
+        }
+        else if (v[i] == elem)
+        {
+            cnt++;
         }
         else
         {
-            mpp[v[i]] = 1;
+            cnt--;
         }
     }
-    return num;
+    int cnt2;
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (v[i] == elem)
+        {
+            cnt2++;
+            if (cnt2 > (v.size() / 2))
+            {
+                return elem;
+            }
+        }
+    }
+    return -1;
 }
-
-//Optimal -- TC = O(log(n*m)); SC = O(1)
-
 
 int main(){
     vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
