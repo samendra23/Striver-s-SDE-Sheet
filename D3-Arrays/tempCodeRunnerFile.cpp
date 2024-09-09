@@ -1,22 +1,16 @@
-int majorityElement(vector<int> &v)
+vector<int> majorityElement(vector<int> &nums)
 // {
 //     unordered_map<int, int> mpp;
-//     int num = v[0];
-//     for (int i = 0; i < v.size(); i++)
+//     vector<int> ans;
+
+//     for (int i = 0; i < nums.size(); i++)
 //     {
-//         if (mpp.find(v[i]) != mpp.end())
+//         mpp[nums[i]]++;
+//         if (mpp[nums[i]] == (nums.size() / 3) + 1)
 //         {
-//             mpp[v[i]]++;
-//             if (mpp[v[i]] > (v.size() / 2))
-//             {
-//                 num = v[i];
-//                 break;
-//             }
-//         }
-//         else
-//         {
-//             mpp[v[i]] = 1;
+//             ans.push_back(nums[i]);
 //         }
 //     }
-//     return num;
+
+//     return ans;
 // }
