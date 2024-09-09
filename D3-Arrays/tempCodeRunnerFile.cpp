@@ -1,16 +1,14 @@
-vector<int> majorityElement(vector<int> &nums)
+int countPaths(int i, int j, int m, int n)
 // {
-//     unordered_map<int, int> mpp;
-//     vector<int> ans;
+//     if (i == m - 1 && j == n - 1)
+//         return 1;
+//     else if (i > m || j > n)
+//         return 0;
+//     else
+//         return countPaths(i + 1, j, m, n) + countPaths(i, j + 1, m, n);
+// }
 
-//     for (int i = 0; i < nums.size(); i++)
-//     {
-//         mpp[nums[i]]++;
-//         if (mpp[nums[i]] == (nums.size() / 3) + 1)
-//         {
-//             ans.push_back(nums[i]);
-//         }
-//     }
-
-//     return ans;
+// int uniquePaths(int m, int n)
+// {
+//     return countPaths(0, 0, m, n);
 // }
