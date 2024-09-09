@@ -5,27 +5,26 @@ using namespace std;
 //Brute -- TC = O(n*n); SC = O(1)
 
 
-//Better -- TC = O(n*log(n)) + O(n); SC = O(n)
-
-
-//Optimal -- TC = O(n) + O(n); SC = O(1)
-vector<int> majorityElement(vector<int> &nums){
+//Better -- TC = O(n); SC = O(n)
+vector<int> majorityElement(vector<int> &nums)
+{
     unordered_map<int, int> mpp;
     vector<int> ans;
 
-    for (int i = 0; i < nums.size(); i++){
+    for (int i = 0; i < nums.size(); i++)
+    {
         mpp[nums[i]]++;
-    }
-
-    for (auto i : mpp){
-        if (i.second > nums.size() / 3)
+        if (mpp[nums[i]] == (nums.size() / 3) + 1)
         {
-            ans.push_back(i.first);
+            ans.push_back(nums[i]);
         }
     }
 
     return ans;
 }
+
+//Optimal
+
 
 int main()
 {
