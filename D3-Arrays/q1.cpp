@@ -1,4 +1,4 @@
-//SEarch in a 2D matrix
+//Search in a 2D matrix
 #include<bits/stdc++.h>
 using namespace std;
 
