@@ -3,26 +3,32 @@
 using namespace std;
 
 //Brute -- TC = O(n^2); SC = O(1)
-vector<int> twoSum(vector<int> &nums, int target)
-{
-    int l = nums.size();
-    int i, j;
-    for (i = 0; i < l; i++)
-    {
-        for (j = i + 1; j < l; j++)
-        {
-            if (nums[i] + nums[j] == target)
-            {
-                // break;
-                return {i, j};
-            }
+// vector<int> twoSum(vector<int> &nums, int target){
+//     int n = nums.size();
+//     for (int i = 0; i < n; i++){
+//         for (int j = i + 1; j < n; j++){
+//             if (nums[i] + nums[j] == target){
+//                 return {i, j};
+//             }
+//         }
+//     }
+//     return {0};
+// }
+
+//Better (Using Hashing) -- TC = O(n) or O(n^2) in worst case for unordered_map; SC = O(n)
+vector<int> twoSum(vector<int> &nums, int target){
+    int n = nums.size();
+    unordered_map<int, int> mpp;
+    for (int i = 0; i < n; i++){
+        if (mpp.find(target - nums[i]) != mpp.end()){
+            return {mpp[target - nums[i]], i};
+        }
+        else{
+            mpp.insert({nums[i], i});
         }
     }
-    return {};
+    return {0};
 }
-
-//Better -- TC = O(); SC = O()
-
 
 //Optimal -- TC = O(); SC = O()
 
