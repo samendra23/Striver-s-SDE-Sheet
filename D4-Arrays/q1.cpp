@@ -16,22 +16,36 @@ using namespace std;
 // }
 
 //Better (Using Hashing) -- TC = O(n) or O(n^2) in worst case for unordered_map; SC = O(n)
+// vector<int> twoSum(vector<int> &nums, int target){
+//     int n = nums.size();
+//     unordered_map<int, int> mpp;
+//     for (int i = 0; i < n; i++){
+//         if (mpp.find(target - nums[i]) != mpp.end()){
+//             return {mpp[target - nums[i]], i};
+//         }
+//         else{
+//             mpp.insert({nums[i], i});
+//         }
+//     }
+//     return {0};
+// }
+
+//Optimal (Using 2-pointer approach) -- TC = O(n) + O(n*logn); SC = O(1)
 vector<int> twoSum(vector<int> &nums, int target){
     int n = nums.size();
-    unordered_map<int, int> mpp;
-    for (int i = 0; i < n; i++){
-        if (mpp.find(target - nums[i]) != mpp.end()){
-            return {mpp[target - nums[i]], i};
-        }
-        else{
-            mpp.insert({nums[i], i});
-        }
+    sort(nums.begin(), nums.end());
+    int i = 0, j = n - 1;
+    while (i < j){
+        int sum = nums[i] + nums[j];
+        if (sum == target)
+            return {i, j};
+        else if (sum < target)
+            i++;
+        else
+            j--;
     }
     return {0};
 }
-
-//Optimal -- TC = O(); SC = O()
-
 
 //Main
 int main()
