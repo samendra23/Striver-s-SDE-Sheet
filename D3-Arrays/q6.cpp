@@ -16,8 +16,6 @@ using namespace std;
 // }
 
 //Optimal -- TC = O(); SC = O(n)
-int cnt = 0;
-
 void merge(vector<int> &arr, int low, int mid, int high) {
     vector<int> temp; // temporary array
     int left = low;      // starting index of left half of arr
@@ -55,22 +53,25 @@ void merge(vector<int> &arr, int low, int mid, int high) {
     }
 }
 
-void countPairs(vector<int> &arr, int l, int mid, int r){
+int countPairs(vector<int> &arr, int l, int mid, int r){
+    int cnt = 0;
     int right = mid + 1;
     for(int i=l; i<=mid; i++){
         while(right<=r && arr[i] > 2*arr[right]){
             right++;
-            cnt += right - (mid + 1);
         }
+        cnt += right - (mid + 1);
     }
+    return cnt;
 }
 
 int mergeSort(vector<int> &arr, int low, int high) {
+    int cnt = 0;
     if (low >= high) return cnt;
     int mid = (low + high) / 2 ;
-    mergeSort(arr, low, mid);  // left half
-    mergeSort(arr, mid + 1, high); // right half
-    countPairs(arr, low, mid, high);
+    cnt += mergeSort(arr, low, mid);  // left half
+    cnt += mergeSort(arr, mid + 1, high); // right half
+    cnt += countPairs(arr, low, mid, high);
     merge(arr, low, mid, high);  // merging sorted halves
     return cnt;
 }
