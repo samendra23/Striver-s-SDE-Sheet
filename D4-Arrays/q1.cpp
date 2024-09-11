@@ -30,7 +30,7 @@ using namespace std;
 //     return {0};
 // }
 
-//Optimal (Using 2-pointer approach) -- TC = O(n) + O(n*logn); SC = O(1)
+//Optimal (Using 2-pointer approach) -- TC = O(n*logn) + O(n); SC = O(1)
 vector<int> twoSum(vector<int> &nums, int target){
     int n = nums.size();
     sort(nums.begin(), nums.end());
