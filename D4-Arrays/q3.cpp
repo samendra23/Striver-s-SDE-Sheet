@@ -27,23 +27,48 @@ using namespace std;
 // }
 
 //Better -- TC = O(n*nlogn); SC = O(1)
+// int longestConsecutive(vector<int> &a){
+//     if (a.size() == 0)
+//         return 0;
+//     sort(a.begin(), a.end());
+//     int longest = 0;
+//     int cnt = 1;
+//     for (int i = 1; i < a.size(); i++){
+//         if (a[i] == a[i - 1] + 1)
+//             cnt++;
+//         else if (a[i] != a[i - 1]){
+//             longest = max(longest, cnt);
+//             cnt = 1;
+//         }
+//     }
+//     longest = max(longest, cnt);
+//     return longest;
+// }
+
+//Optimal -- TC = O(3*n); SC = O(n)
 int longestSuccessiveElements(vector<int>&a) {
-    sort(a.begin(), a.end());
-    int longest = 0;
-    int cnt = 1;
+    if (a.size() == 0) return 0;
+
+    unordered_set<int> st;
     for(int i=0; i<a.size(); i++){
-        if(a[i+1] == a[i]+1) cnt++;
-        else if(a[i+1] != a[i]){
+        st.insert(a[i]);
+    }
+
+    int longest = 1;
+    int cnt = 1;
+    for(auto it: st){
+        if (st.find(it - 1) == st.end()) { // if it is starting elem, its previous doesn't exist
+            int cnt = 1;
+            int x = it;
+            while(st.find(x+1) != st.end()){ //if next element exists
+                x = x+1;
+                cnt++;
+            }
             longest = max(longest, cnt);
-            cnt = 1;
         }
     }
-    longest = max(longest, cnt);
     return longest;
 }
-
-//Optimal -- TC = O(); SC = O()
-
 
 //Main
 int main(){
