@@ -19,21 +19,38 @@ using namespace std;
 // }
 
 //Better -- TC = O(n^2); SC = O(1)
+// int getLongestZeroSumSubarrayLength(vector<int>& a) {
+//     int maxLen = 0;
+//     for(int i=0; i<a.size(); i++){
+// 		int sum = 0;
+//         for(int j=i; j<a.size(); j++){
+// 			sum += a[j];
+// 			if(sum == 0) maxLen = max(maxLen, j-i+1);
+//         }
+//     }
+
+//     return maxLen;
+// }
+
+//Optimal -- TC = O(n); SC = O(n)
 int getLongestZeroSumSubarrayLength(vector<int>& a) {
     int maxLen = 0;
+	unordered_map<int, int> mpp;
+	int sum = 0;
     for(int i=0; i<a.size(); i++){
-		int sum = 0;
-        for(int j=i; j<a.size(); j++){
-			sum += a[j];
-			if(sum == 0) maxLen = max(maxLen, j-i+1);
-        }
+		sum += a[i];
+		if(sum == 0){
+			maxLen = i + 1;
+		}
+		else if(mpp.find(sum) != mpp.end()){
+			maxLen = max(maxLen, i-mpp[sum]);
+		}
+		else{
+			mpp[sum] = i;
+		} 
     }
-
     return maxLen;
 }
-
-//Optimal -- TC = O(); SC = O()
-
 
 //Main
 int main() {
