@@ -34,35 +34,58 @@ using namespace std;
 // }
 
 //Better -- TC = O(n^2); SC = O(n)
+// int lengthOfLongestSubstring(string s)
+// {
+//     if (s.length() == 0)
+//         return 0;
+
+//     int maxi = 1;
+//     for (int i = 0; i < s.length(); i++)
+//     {
+//         unordered_set<int> st;
+//         int cnt = 0;
+//         for (int j = i; j < s.length(); j++)
+//         {
+//             if (st.find(s[j]) != st.end())
+//             {
+//                 break;
+//             }
+//             else
+//             {
+//                 st.insert(s[j]);
+//                 cnt++;
+//             }
+//         }
+//         maxi = max(maxi, cnt);
+//     }
+//     return maxi;
+// }
+
+//Optimal 1 (Using 2 pointers with set) -- TC = O(2*n); SC = O(n)
 int lengthOfLongestSubstring(string s)
 {
     if (s.length() == 0)
         return 0;
 
     int maxi = 1;
-    for (int i = 0; i < s.length(); i++)
+    unordered_set<int> st;
+    int l = 0, r = 0;
+
+    for (int r = 0; r < s.length(); r++)
     {
-        unordered_set<int> st;
-        int cnt = 0;
-        for (int j = i; j < s.length(); j++)
+        if (st.find(s[r]) != st.end())
         {
-            if (st.find(s[j]) != st.end())
+            while (l < r && st.find(s[r]) != st.end())
             {
-                break;
-            }
-            else
-            {
-                st.insert(s[j]);
-                cnt++;
+                st.erase(s[l]);
+                l++;
             }
         }
-        maxi = max(maxi, cnt);
+        st.insert(s[r]);
+        maxi = max(maxi, r - l + 1);
     }
     return maxi;
 }
-
-//Optimal -- TC = O(); SC = O()
-
 
 //Main
 int main() {
