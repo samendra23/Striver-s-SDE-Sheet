@@ -88,26 +88,47 @@ using namespace std;
 // }
 
 //Optimal 2 (Using 2 pointers with map) -- TC = O(n); SC = O(n)
+// int lengthOfLongestSubstring(string s)
+// {
+//     if (s.length() == 0)
+//         return 0;
+
+//     int maxi = 1;
+//     unordered_map<int, int> mpp;
+//     int l = 0, r = 0;
+
+//     while (r < s.length())
+//     {
+//         if (mpp.find(s[r]) != mpp.end())
+//         {
+//             l = max(l, mpp[s[r]] + 1);
+//         }
+//         mpp[s[r]] = r;
+//         r++;
+//         maxi = max(maxi, r - l);
+//     }
+//     return maxi;
+// }
+
+//Optimal 2 (another way) -- FASTER
 int lengthOfLongestSubstring(string s)
 {
-    if (s.length() == 0)
-        return 0;
+    vector<int> mpp(256, -1);
 
-    int maxi = 1;
-    unordered_map<int, int> mpp;
-    int l = 0, r = 0;
-
-    while (r < s.length())
+    int left = 0, right = 0;
+    int n = s.size();
+    int len = 0;
+    while (right < n)
     {
-        if (mpp.find(s[r]) != mpp.end())
-        {
-            l = max(l, mpp[s[r]] + 1);
-        }
-        mpp[s[r]] = r;
-        r++;
-        maxi = max(maxi, r - l);
+        if (mpp[s[right]] != -1)
+            left = max(mpp[s[right]] + 1, left);
+
+        mpp[s[right]] = right;
+
+        len = max(len, right - left + 1);
+        right++;
     }
-    return maxi;
+    return len;
 }
 
 //Main
