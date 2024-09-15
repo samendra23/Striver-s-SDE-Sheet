@@ -62,27 +62,50 @@ using namespace std;
 // }
 
 //Optimal 1 (Using 2 pointers with set) -- TC = O(2*n); SC = O(n)
+// int lengthOfLongestSubstring(string s)
+// {
+//     if (s.length() == 0)
+//         return 0;
+
+//     int maxi = 1;
+//     unordered_set<int> st;
+//     int l = 0, r = 0;
+
+//     for (int r = 0; r < s.length(); r++)
+//     {
+//         if (st.find(s[r]) != st.end())
+//         {
+//             while (l < r && st.find(s[r]) != st.end())
+//             {
+//                 st.erase(s[l]);
+//                 l++;
+//             }
+//         }
+//         st.insert(s[r]);
+//         maxi = max(maxi, r - l + 1);
+//     }
+//     return maxi;
+// }
+
+//Optimal 2 (Using 2 pointers with map) -- TC = O(n); SC = O(n)
 int lengthOfLongestSubstring(string s)
 {
     if (s.length() == 0)
         return 0;
 
     int maxi = 1;
-    unordered_set<int> st;
+    unordered_map<int, int> mpp;
     int l = 0, r = 0;
 
-    for (int r = 0; r < s.length(); r++)
+    while (r < s.length())
     {
-        if (st.find(s[r]) != st.end())
+        if (mpp.find(s[r]) != mpp.end())
         {
-            while (l < r && st.find(s[r]) != st.end())
-            {
-                st.erase(s[l]);
-                l++;
-            }
+            l = max(l, mpp[s[r]] + 1);
         }
-        st.insert(s[r]);
-        maxi = max(maxi, r - l + 1);
+        mpp[s[r]] = r;
+        r++;
+        maxi = max(maxi, r - l);
     }
     return maxi;
 }

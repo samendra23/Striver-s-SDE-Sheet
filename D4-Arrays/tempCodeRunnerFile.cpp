@@ -4,21 +4,18 @@ int lengthOfLongestSubstring(string s)
         return 0;
 
     int maxi = 1;
-    unordered_set<int> st;
+    unordered_map<int, int> mpp;
     int l = 0, r = 0;
 
-    for (int r = 0; r < s.length(); r++)
+    while (r < s.length())
     {
-        if (st.find(s[r]) != st.end())
+        if (mpp.find(s[r]) != mpp.end())
         {
-            while (l < r && st.find(s[r]) != st.end())
-            {
-                st.erase(s[l]);
-                l++;
-            }
+            l = max(l, mpp[s[r]] + 1);
         }
-        st.insert(s[r]);
-        maxi = max(maxi, r - l + 1);
+        mpp[s[r]] = r;
+        r++;
+        maxi = max(maxi, r - l);
     }
     return maxi;
 }
