@@ -26,27 +26,40 @@ public:
 };
 
 //Brute -- TC = O(2n); SC = O(n)
+// Node* reverseLinkedList(Node* head){
+//     Node* temp = head;
+//     stack<int> st;
+
+//     while(temp){
+//         st.push(temp->data);
+//         temp = temp->next;
+//     }
+
+//     temp = head;
+//     while(temp){
+//         temp->data = st.top();
+//         st.pop();
+//         temp = temp->next;
+//     }
+
+//     return head;
+// }
+
+//Better -- TC = O(n); SC = O(1)
 Node* reverseLinkedList(Node* head){
     Node* temp = head;
-    stack<int> st;
-
+    Node* prev = nullptr;
+    Node* next = nullptr;
     while(temp){
-        st.push(temp->data);
-        temp = temp->next;
+        next = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = next;
     }
 
-    temp = head;
-    while(temp){
-        temp->data = st.top();
-        st.pop();
-        temp = temp->next;
-    }
-
+    head = prev;
     return head;
 }
-
-//Better -- TC = O(); SC = O()
-
 
 //Optimal -- TC = O(); SC = O()
 
