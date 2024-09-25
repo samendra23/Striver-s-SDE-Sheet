@@ -45,24 +45,31 @@ public:
 //     return head;
 // }
 
-//Better -- TC = O(n); SC = O(1)
+//Optimal 1 -- TC = O(n); SC = O(1)
+// Node* reverseLinkedList(Node* head){
+//     Node* temp = head;
+//     Node* prev = NULL;
+//     Node* next = NULL;
+//     while(temp){
+//         next = temp->next;
+//         temp->next = prev;
+//         prev = temp;
+//         temp = next;
+//     }
+
+//     head = prev;
+//     return head;
+// }
+
+//Optimal 2 -- TC = O(n); SC = O(1)
 Node* reverseLinkedList(Node* head){
-    Node* temp = head;
-    Node* prev = nullptr;
-    Node* next = nullptr;
-    while(temp){
-        next = temp->next;
-        temp->next = prev;
-        prev = temp;
-        temp = next;
-    }
-
-    head = prev;
-    return head;
+    if(head == NULL || head->next == NULL) return head;
+    Node* newHead = reverseLinkedList(head->next);
+    Node* front = head->next;
+    front->next = head;
+    head->next = NULL;
+    return newHead;
 }
-
-//Optimal -- TC = O(); SC = O()
-
 
 //Main
 // Function to print the linked list
