@@ -45,12 +45,30 @@ public:
 // }
 
 //Optimal -- TC = O(n/2); SC = O(1)
-Node *findMiddle(Node *head) {
-    Node* slow = head;
-    Node* fast = head;
-    while(fast != NULL && fast->next != NULL){
-        slow = slow->next;
-        fast = fast->next->next;
+// Node *findMiddle(Node *head) {
+//     Node* slow = head;
+//     Node* fast = head;
+//     while(fast != NULL && fast->next != NULL){
+//         slow = slow->next;
+//         fast = fast->next->next;
+//     }
+
+//     return slow;
+// }
+
+//Optimal -- faster
+Node *findMiddle(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
     }
 
     return slow;
