@@ -26,26 +26,35 @@ public:
 };
 
 //Brute -- TC = O(n + n/2); SC = O(1)
+// Node *findMiddle(Node *head) {
+//     // Write your code here
+//     int cnt = 0;
+//     Node* temp = head;
+//     while(temp){
+//         cnt++;
+//         temp = temp->next;
+//     }
+
+//     cnt = cnt/2 + 1;
+//     temp = head;
+//     for(int i=1; i<cnt; i++){
+//         temp = temp->next;
+//     }
+
+//     return temp;
+// }
+
+//Optimal -- TC = O(n/2); SC = O(1)
 Node *findMiddle(Node *head) {
-    // Write your code here
-    int cnt = 0;
-    Node* temp = head;
-    while(temp){
-        cnt++;
-        temp = temp->next;
+    Node* slow = head;
+    Node* fast = head;
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
-    cnt = cnt/2 + 1;
-    temp = head;
-    for(int i=1; i<cnt; i++){
-        temp = temp->next;
-    }
-
-    return temp;
+    return slow;
 }
-
-//Optimal -- TC = O(n); SC = O(1)
-
 
 //Main
 // Function to print the linked list
