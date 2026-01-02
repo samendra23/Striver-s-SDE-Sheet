@@ -26,33 +26,33 @@ public:
 };
 
 //Brute -- TC = O(n1+n2) + O(nlogn) + O(n); SC = O(n) + O(n)
-Node* sortTwoLinkedLists(Node* first, Node* second) {
-    vector<int> ans;
-    Node* tempf = first;
-    Node* temps = second;
+// Node* sortTwoLinkedLists(Node* first, Node* second) {
+//     vector<int> ans;
+//     Node* tempf = first;
+//     Node* temps = second;
 
-    while (tempf) {
-        ans.push_back(tempf->data);
-        tempf = tempf->next;
-    }
+//     while (tempf) {
+//         ans.push_back(tempf->data);
+//         tempf = tempf->next;
+//     }
 
-    while (temps) {
-        ans.push_back(temps->data);
-        temps = temps->next;
-    }
+//     while (temps) {
+//         ans.push_back(temps->data);
+//         temps = temps->next;
+//     }
 
-    sort(ans.begin(), ans.end());
+//     sort(ans.begin(), ans.end());
 
-    Node* head = new Node(ans[0]);
-    Node* temp = head;
+//     Node* head = new Node(ans[0]);
+//     Node* temp = head;
 
-    for (int i = 1; i < ans.size(); i++) {
-        temp->next = new Node(ans[i]);
-        temp = temp->next;
-    }
+//     for (int i = 1; i < ans.size(); i++) {
+//         temp->next = new Node(ans[i]);
+//         temp = temp->next;
+//     }
 
-    return head;
-}
+//     return head;
+// }
 
 //Optimal -- TC = O(n); SC = O(1)
 
