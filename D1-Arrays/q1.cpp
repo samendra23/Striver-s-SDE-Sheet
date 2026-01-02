@@ -1,5 +1,5 @@
 //Set Matrix Zeroes
-//Brute -- TC = O((n*m)*(n+m))+O(n+m); SC = O(1)
+//Brute -- TC = O((n*m)*(n+m))+O(n*m); SC = O(1)
 class Solution {
 public:
     void markrow(vector<vector<int>>& mat, int row, int col, int i) {
